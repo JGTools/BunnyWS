@@ -8,16 +8,14 @@
     <script>
         var ws = new WebSocket("ws://localhost:8080/");
 
-        ws.onopen = function () {
+        ws.onopen = () => {
             console.log("WebSocket connection established");
         };
-
-        ws.onclose = function () {
+        ws.onclose = () => {
             console.log("WebSocket connection closed");
         };
-
-        ws.onmessage = function (event) {
-            console.log("Received message: " + event.data);
+        ws.onmessage = (e) => {
+            console.log("Received message: " + e.data);
         };
 
         function sendMove() {

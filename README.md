@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/dm/@jgtools/bunnyws)](https://www.npmjs.com/package/@jgtools/bunnyws)
 [![GitHub](https://img.shields.io/github/license/jgtools/bunnyws)](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
 
-Lightweight WebSocket lib for Bun
+Lightweight WebSocket library for Bun
 
 ## Installation
 

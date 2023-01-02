@@ -1,4 +1,4 @@
-import BunnyWS, { BunnyWSClient, BunnyWSEvents } from "../../src";
+import BunnyWS, { BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
 
 const events: BunnyWSEvents = {
     open(ws: BunnyWSClient) {
