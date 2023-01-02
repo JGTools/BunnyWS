@@ -1,39 +1,53 @@
-export interface LobbyUser_I {
+import { Server, ServerWebSocket } from "bun";
+import { nanoid } from "nanoid";
+
+export type BunnyWSClient = ServerWebSocket<{
     id: string;
-    name: string;
+    broadcast: (msg: string | Uint8Array) => void;
+}>;
+
+export interface BunnyWSEvents {
+    open: (ws: BunnyWSClient) => void;
+    message: (ws: BunnyWSClient, msg: string | Uint8Array) => void;
+    close: (ws: BunnyWSClient) => void;
 }
 
-export default class BunnyWS<MetaType_I, UserType_I extends LobbyUser_I>  {
-    #id: string;
-    #hostID: string | null = null;
-    #users = new Map<string, UserType_I>();
-    #meta: MetaType_I;
-
-    constructor(id: string, meta: MetaType_I) {
-        this.#id = id;
-        this.#meta = meta;
-    }
-    addUser(u: UserType_I) {
-        this.#users.set(u.id, u);
-        if (this.#hostID == null)
-            this.#hostID = u.id;
-    }
-    removeUser(id: string) {
-        this.#users.delete(id);
-        if (this.#hostID == id) {
-            if (this.#users.size > 0)
-                this.#hostID = [...this.#users][0][1].id;
-            else
-                this.#hostID = null;
+export default class BunnyWS {
+    clients = new Map<string, BunnyWSClient>();
+    broadcast = (msg: string | Uint8Array) => {
+        for (const ws of this.clients.values()) {
+            ws.send(msg);
         }
+    };
+    constructor(PORT: number, events: BunnyWSEvents) {
+        const clients = this.clients;
+        const broadcast = this.broadcast;
+        Bun.serve({
+            websocket: {
+                open(ws: BunnyWSClient) {
+                    ws.data = {
+                        id: nanoid(),
+                        broadcast: broadcast
+                    };
+                    clients.set(ws.data.id, ws);
+
+                    events.open(ws);
+                },
+                message(ws: BunnyWSClient, msg: string | Uint8Array) {
+                    events.message(ws, msg);
+                },
+                close(ws: BunnyWSClient) {
+                    clients.delete(ws.data.id);
+
+                    events.close(ws);
+                }
+            },
+            fetch(req: Request, server: Server) {
+                if (!server.upgrade(req)) {
+                    return new Response(null, { status: 404 });
+                }
+            },
+            port: PORT
+        });
     }
-    setMeta(u: LobbyUser_I, meta: MetaType_I) {
-        if (this.#hostID != u.id)
-            return;
-        this.#meta = meta;
-    }
-    getID() { return this.#id }
-    getHostID() { return this.#hostID }
-    getUsers() { return this.#users }
-    getMeta() { return this.#meta }
 }

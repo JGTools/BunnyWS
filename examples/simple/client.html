@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>WebSocket Test</title>
+</head>
+
+<body>
+    <script>
+        var ws = new WebSocket("ws://localhost:8080/");
+
+        ws.onopen = function () {
+            console.log("WebSocket connection established");
+        };
+
+        ws.onclose = function () {
+            console.log("WebSocket connection closed");
+        };
+
+        ws.onmessage = function (event) {
+            console.log("Received message: " + event.data);
+        };
+
+        function sendMove() {
+            ws.send("move");
+        }
+
+        function sendShoot() {
+            ws.send("shoot");
+        }
+    </script>
+    <button onclick="sendMove()">Move</button>
+    <button onclick="sendShoot()">Shoot</button>
+</body>
+
+</html>
