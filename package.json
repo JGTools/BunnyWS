@@ -1,0 +1,33 @@
+{
+    "name": "@jgtools/bunnyws",
+    "version": "1.0.0",
+    "description": "Lightweight WebSocket lib for Bun",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JGTools/BunnyWS.git"
+    },
+    "keywords": [
+        "javascript",
+        "typescript",
+        "bunnyws"
+    ],
+    "author": "Erik1001",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/JGTools/BunnyWS/issues"
+    },
+    "homepage": "https://github.com/JGTools/BunnyWS#readme",
+    "dependencies": {
+        "nanoid": "^4.0.0"
+    },
+    "devDependencies": {
+        "tslib": "^2.4.1",
+        "bun-types": "^0.4.0"
+    }
+}
