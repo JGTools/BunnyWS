@@ -1,7 +1,7 @@
 {
     "name": "@jgtools/bunnyws",
-    "version": "1.0.1",
-    "description": "Lightweight WebSocket lib for Bun",
+    "version": "1.0.2",
+    "description": "Lightweight WebSocket library for Bun",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -15,7 +15,10 @@
     "keywords": [
         "javascript",
         "typescript",
-        "bunnyws"
+        "bunnyws",
+        "ws",
+        "websocket",
+        "bun"
     ],
     "author": "Erik1001",
     "license": "MIT",
