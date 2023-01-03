@@ -1,5 +1,4 @@
 import { Server, ServerWebSocket } from "bun";
-import { nanoid } from "nanoid";
 
 export type BunnyWSClient = ServerWebSocket<{
     id: string;
@@ -26,7 +25,7 @@ export default class BunnyWS {
             websocket: {
                 open(ws: BunnyWSClient) {
                     ws.data = {
-                        id: nanoid(),
+                        id: crypto.randomUUID(),
                         broadcast: broadcast
                     };
                     clients.set(ws.data.id, ws);

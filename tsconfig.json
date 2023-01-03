@@ -9,9 +9,12 @@
         "strict": true,
         "skipLibCheck": true,
         "moduleResolution": "node",
-        "types": ["bun-types"]
+        "types": [
+            "bun-types"
+        ]
     },
     "exclude": [
         "examples",
+        "dist"
     ]
 }

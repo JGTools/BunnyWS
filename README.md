@@ -6,6 +6,11 @@
 
 Lightweight WebSocket library for Bun
 
+## Features
+- :rabbit: Works with Bun
+- :zap: Zero dependencies
+- :blue_square: Written in TypeScript
+
 ## Installation
 
 ### Using bun
