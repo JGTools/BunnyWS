@@ -49,24 +49,23 @@ setInterval(() => console.log(bws.clients.size), 5000);
 ```
 ## Docs
 
-## class BunnyWS
+### BunnyWS
 
-### Properties
+`BunnyWS` is a WebSocket server for bun.
 
 | Property | Type |
 |----------|------|
 | `clients` | `Map<string, BunnyWSClient>` |
 | `broadcast` | `(msg: string \| Uint8Array) => void` |
 
-### Parameters
-
+Constructor parameters:
 | Parameter | Type |
 |-----------|------|
 | `port` | `number` |
 | `events` | `BunnyWSEvents` |
 
 
-## type BunnyWSClient
+### BunnyWSClient
 
 `BunnyWSClient` is a `ServerWebSocket` and has the following additional properties:
 
@@ -75,7 +74,7 @@ setInterval(() => console.log(bws.clients.size), 5000);
 | `id`     | `string` |
 | `broadcast` | `(msg: string \| Uint8Array) => void` |
 
-## interface  BunnyWSEvents
+### BunnyWSEvents
 
 `BunnyWSEvents` is an interface that defines the event handlers for a `BunnyWS` server.
 

@@ -23,9 +23,6 @@ export interface BunnyWSEvents {
  * Properties:
  * - `clients` is a Map of all connected clients, with the client id as the key and the BunnyWSClient as the value.
  * - `broadcast` is a method that takes a message of type string or Uint8Array and sends it to all connected clients.
- *
- * @param port - The port number to listen on.
- * @param events - An object containing event handlers for the BunnyWS server.
  */
 export class BunnyWS {
     clients = new Map<string, BunnyWSClient>();
@@ -34,6 +31,10 @@ export class BunnyWS {
             ws.send(msg);
         }
     };
+    /**
+    * @param port - The port number to listen on.
+    * @param events - An object containing event handlers for the BunnyWS server.
+    */
     constructor(port: number, events: BunnyWSEvents) {
         const clients = this.clients;
         const broadcast = this.broadcast;
