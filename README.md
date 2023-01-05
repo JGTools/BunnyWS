@@ -20,7 +20,7 @@ bun a @jgtools/bunnyws
 ```
 
 ```javascript
-import BunnyWS from "@jgtools/bunnyws";
+import { BunnyWS } from "@jgtools/bunnyws";
 // ...
 ```
 
