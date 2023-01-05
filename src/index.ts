@@ -1,24 +1,40 @@
 import { Server, ServerWebSocket } from "bun";
 
+/**
+ * BunnyWSClient is a ServerWebSocket and has an additional property `id` of type string, and a method `broadcast` which takes a message of type string or Uint8Array and sends it to all connected clients.
+ */
 export type BunnyWSClient = ServerWebSocket<{
     id: string;
     broadcast: (msg: string | Uint8Array) => void;
 }>;
 
+/**
+ * BunnyWSEvents is an interface that defines the event handlers for a BunnyWS server.
+ */
 export interface BunnyWSEvents {
     open: (ws: BunnyWSClient) => void;
     message: (ws: BunnyWSClient, msg: string | Uint8Array) => void;
     close: (ws: BunnyWSClient) => void;
 }
 
-export default class BunnyWS {
+/**
+ * BunnyWS is a WebSocket server that broadcasts messages to all connected clients.
+ *
+ * Properties:
+ * - `clients` is a Map of all connected clients, with the client id as the key and the BunnyWSClient as the value.
+ * - `broadcast` is a method that takes a message of type string or Uint8Array and sends it to all connected clients.
+ *
+ * @param port - The port number to listen on.
+ * @param events - An object containing event handlers for the BunnyWS server.
+ */
+export class BunnyWS {
     clients = new Map<string, BunnyWSClient>();
     broadcast = (msg: string | Uint8Array) => {
         for (const ws of this.clients.values()) {
             ws.send(msg);
         }
     };
-    constructor(PORT: number, events: BunnyWSEvents) {
+    constructor(port: number, events: BunnyWSEvents) {
         const clients = this.clients;
         const broadcast = this.broadcast;
         Bun.serve({
@@ -46,7 +62,7 @@ export default class BunnyWS {
                     return new Response(null, { status: 404 });
                 }
             },
-            port: PORT
+            port
         });
     }
 }

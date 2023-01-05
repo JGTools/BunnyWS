@@ -27,7 +27,7 @@ import BunnyWS from "@jgtools/bunnyws";
 ## Usage
 
 ```typescript
-import BunnyWS, { BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
+import { BunnyWS, BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
 
 const events: BunnyWSEvents = {
   open(ws: BunnyWSClient) {
@@ -47,6 +47,43 @@ const bws = new BunnyWS(8080, events);
 setInterval(() => bws.broadcast("Broadcast"), 3000);
 setInterval(() => console.log(bws.clients.size), 5000);
 ```
+## Docs
+
+## class BunnyWS
+
+### Properties
+
+| Property | Type |
+|----------|------|
+| `clients` | `Map<string, BunnyWSClient>` |
+| `broadcast` | `(msg: string \| Uint8Array) => void` |
+
+### Parameters
+
+| Parameter | Type |
+|-----------|------|
+| `port` | `number` |
+| `events` | `BunnyWSEvents` |
+
+
+## type BunnyWSClient
+
+`BunnyWSClient` is a `ServerWebSocket` and has the following additional properties:
+
+| Property | Type |
+|----------|------|
+| `id`     | `string` |
+| `broadcast` | `(msg: string \| Uint8Array) => void` |
+
+## interface  BunnyWSEvents
+
+`BunnyWSEvents` is an interface that defines the event handlers for a `BunnyWS` server.
+
+| Property | Type |
+|----------|------|
+| `open` | `(ws: BunnyWSClient) => void` |
+| `message` | `(ws: BunnyWSClient, msg: string \| Uint8Array) => void` |
+| `close` | `(ws: BunnyWSClient) => void` |
 
 ## License
 
