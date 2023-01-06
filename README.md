@@ -51,7 +51,7 @@ setInterval(() => console.log(bws.clients.size), 5000);
 
 ### BunnyWS
 
-`BunnyWS` is a WebSocket server for bun.
+`BunnyWS` is a WebSocket server.
 
 | Property | Type |
 |----------|------|
@@ -67,7 +67,7 @@ Constructor parameters:
 
 ### BunnyWSClient
 
-`BunnyWSClient` is a `ServerWebSocket` and has the following additional properties:
+`BunnyWSClient` is a `ServerWebSocket` with additional properties.
 
 | Property | Type |
 |----------|------|

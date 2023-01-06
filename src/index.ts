@@ -1,7 +1,7 @@
 import { Server, ServerWebSocket } from "bun";
 
 /**
- * BunnyWSClient is a ServerWebSocket and has an additional property `id` of type string, and a method `broadcast` which takes a message of type string or Uint8Array and sends it to all connected clients.
+ * BunnyWSClient is a ServerWebSocket and has an additional property `id` of type string, and a method `broadcast` which sends a message to all connected clients.
  */
 export type BunnyWSClient = ServerWebSocket<{
     id: string;
@@ -18,7 +18,7 @@ export interface BunnyWSEvents {
 }
 
 /**
- * BunnyWS is a WebSocket server that broadcasts messages to all connected clients.
+ * BunnyWS is a WebSocket server.
  *
  * Properties:
  * - `clients` is a Map of all connected clients, with the client id as the key and the BunnyWSClient as the value.
