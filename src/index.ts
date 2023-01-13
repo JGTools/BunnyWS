@@ -13,7 +13,7 @@ export class BunnyWS {
 
     /**
     * @param port - The port number to listen on
-    * @param events - An object containing event handlers for the BunnyWS server
+    * @param events - An object containing event handlers
     */
     constructor(port: number, events: BunnyWSEvents) {
         this.server = Bun.serve({

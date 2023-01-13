@@ -27,26 +27,27 @@ import { BunnyWS } from "@jgtools/bunnyws";
 ## Usage
 
 ```typescript
-import { BunnyWS, BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
+import { BunnyWS, BunnyWSEvents } from "@jgtools/bunnyws";
+import { ServerWebSocket } from "bun";
 
 const events: BunnyWSEvents = {
-  open(ws: BunnyWSClient) {
-    console.log("Client has connected", ws.data.id);
-  },
-  message(ws: BunnyWSClient, msg: string | Uint8Array) {
-    console.log("Received:", msg);
-    ws.send(msg);
-    ws.data.broadcast(msg + ws.data.id);
-  },
-  close(ws: BunnyWSClient) {
-    console.log("Client has disconnected:", ws.data.id);
-  },
-};
+    open(ws: ServerWebSocket) {
+        console.log("Client has connected", ws.data);
+    },
+    message(ws: ServerWebSocket, msg: string | ArrayBufferView | ArrayBuffer) {
+        console.log("Received:", msg);
+        ws.send(msg); // send to client
+        ws.publish("global", msg); // send to all connected clients (including itself)
+    },
+    close(ws: ServerWebSocket) {
+        console.log("Client has disconnected:", ws.data);
+    }
+}
 
 const bws = new BunnyWS(8080, events);
-setInterval(() => bws.broadcast("Broadcast"), 3000);
-setInterval(() => console.log(bws.clients.size), 5000);
+setInterval(() => bws.publish("Published to all"), 3000);
 ```
+
 ## Docs
 
 ### BunnyWS
@@ -65,24 +66,15 @@ Constructor parameters:
 | `events` | `BunnyWSEvents` |
 
 
-### BunnyWSClient
-
-`BunnyWSClient` is a `ServerWebSocket` with additional properties.
-
-| Property | Type |
-|----------|------|
-| `id`     | `string` |
-| `broadcast` | `(msg: string \| Uint8Array) => void` |
-
 ### BunnyWSEvents
 
 `BunnyWSEvents` is an interface that defines the event handlers for a `BunnyWS` server.
 
 | Property | Type |
 |----------|------|
-| `open` | `(ws: BunnyWSClient) => void` |
-| `message` | `(ws: BunnyWSClient, msg: string \| Uint8Array) => void` |
-| `close` | `(ws: BunnyWSClient) => void` |
+| `open` | `(ws: ServerWebSocket) => void` |
+| `message` | `(ws: ServerWebSocket, msg: string \| ArrayBufferView \| ArrayBuffer) => void` |
+| `close` | `(ws: ServerWebSocket) => void` |
 
 ## License
 
