@@ -20,7 +20,7 @@ export class BunnyWS {
             websocket: {
                 open(ws: ServerWebSocket) {
                     ws.subscribe("global");
-                    return events.open(ws);
+                    events.open(ws);
                 },
                 message: events.message,
                 close: events.close,

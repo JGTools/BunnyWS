@@ -54,17 +54,16 @@ setInterval(() => bws.publish("Published to all"), 3000);
 
 `BunnyWS` is a WebSocket server.
 
-| Property | Type |
-|----------|------|
-| `clients` | `Map<string, BunnyWSClient>` |
-| `broadcast` | `(msg: string \| Uint8Array) => void` |
-
 Constructor parameters:
 | Parameter | Type |
 |-----------|------|
 | `port` | `number` |
 | `events` | `BunnyWSEvents` |
 
+
+| Method | Type |
+|----------|------|
+| `publish` | `(msg: string \| ArrayBufferView \| ArrayBuffer, compress?: boolean) => number` |
 
 ### BunnyWSEvents
 

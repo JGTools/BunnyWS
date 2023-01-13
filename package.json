@@ -1,6 +1,6 @@
 {
     "name": "@jgtools/bunnyws",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Lightweight WebSocket library for Bun",
     "type": "module",
     "main": "dist/index.js",
@@ -20,7 +20,7 @@
         "websocket",
         "bun"
     ],
-    "author": "Erik1001",
+    "author": "Erik Ekelöf",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/JGTools/BunnyWS/issues"
