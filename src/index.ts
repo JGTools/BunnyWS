@@ -7,9 +7,10 @@ export interface BunnyWSEvents {
     close: (ws: ServerWebSocket) => void;
 }
 
-/** BunnyWS is a WebSocket server */
+/** WebSocket server*/
 export class BunnyWS {
-    private server;
+    private server: Server;
+
     /**
     * @param port - The port number to listen on
     * @param events - An object containing event handlers for the BunnyWS server
@@ -19,7 +20,7 @@ export class BunnyWS {
             websocket: {
                 open(ws: ServerWebSocket) {
                     ws.subscribe("global");
-                    events.open(ws);
+                    return events.open(ws);
                 },
                 message: events.message,
                 close: events.close,
@@ -31,9 +32,8 @@ export class BunnyWS {
             port
         });
     }
-
     /** Publishes a message to all connected clients */
-    publish(msg: string | ArrayBufferView | ArrayBuffer) {
-        this.server.publish("global", msg);
+    publish(msg: string | ArrayBufferView | ArrayBuffer, compress?: boolean): number {
+        return this.server.publish("global", msg, compress);
     }
 }
