@@ -60,7 +60,7 @@ Constructor parameters:
 | `port` | `number` |
 | `events` | `BunnyWSEvents` |
 
-
+Methods:
 | Method | Type |
 |----------|------|
 | `publish` | `(msg: string \| ArrayBufferView \| ArrayBuffer, compress?: boolean) => number` |
