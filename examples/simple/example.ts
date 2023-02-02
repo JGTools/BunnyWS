@@ -1,4 +1,5 @@
 import { BunnyWS, BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
+import { ArrayBufferView } from "bun";
 
 const events: BunnyWSEvents = {
     open(ws: BunnyWSClient) {

@@ -1,4 +1,4 @@
-import { Server, ServerWebSocket } from "bun";
+import { ArrayBufferView, Server, ServerWebSocket } from "bun";
 
 /** ServerWebSocket with an addition property that stores clients id */
 export type BunnyWSClient = ServerWebSocket<{ id: string }>;
