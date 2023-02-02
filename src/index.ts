@@ -37,7 +37,7 @@ export class BunnyWS {
         });
     }
     /** Publishes a message to all connected clients */
-    publish(msg: string | ArrayBuffer, compress?: boolean): number {
+    publish(msg: string | ArrayBufferView | ArrayBuffer, compress?: boolean): number {
         return this.server.publish("global", msg, compress);
     }
 }
