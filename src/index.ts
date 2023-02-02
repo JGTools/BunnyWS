@@ -1,10 +1,13 @@
 import { Server, ServerWebSocket } from "bun";
 
+/** ServerWebSocket with an addition property that stores clients id */
+export type BunnyWSClient = ServerWebSocket<{ id: string }>;
+
 /** Interface that defines the event handlers for a BunnyWS server */
 export interface BunnyWSEvents {
-    open: (ws: ServerWebSocket) => void;
-    message: (ws: ServerWebSocket, msg: string | ArrayBufferView | ArrayBuffer) => void;
-    close: (ws: ServerWebSocket) => void;
+    open: (ws: BunnyWSClient) => void;
+    message: (ws: BunnyWSClient, msg: string | ArrayBufferView | ArrayBuffer) => void;
+    close: (ws: BunnyWSClient) => void;
 }
 
 /** WebSocket server*/
@@ -18,7 +21,8 @@ export class BunnyWS {
     constructor(port: number, events: BunnyWSEvents) {
         this.server = Bun.serve({
             websocket: {
-                open(ws: ServerWebSocket) {
+                open(ws: BunnyWSClient) {
+                    ws.data.id = crypto.randomUUID();
                     ws.subscribe("global");
                     events.open(ws);
                 },
@@ -33,7 +37,7 @@ export class BunnyWS {
         });
     }
     /** Publishes a message to all connected clients */
-    publish(msg: string | ArrayBufferView | ArrayBuffer, compress?: boolean): number {
+    publish(msg: string | ArrayBuffer, compress?: boolean): number {
         return this.server.publish("global", msg, compress);
     }
 }

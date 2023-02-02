@@ -1,16 +1,15 @@
-import { BunnyWS, BunnyWSEvents } from "@jgtools/bunnyws";
-import { ServerWebSocket } from "bun";
+import { BunnyWS, BunnyWSClient, BunnyWSEvents } from "@jgtools/bunnyws";
 
 const events: BunnyWSEvents = {
-    open(ws: ServerWebSocket) {
+    open(ws: BunnyWSClient) {
         console.log("Client has connected", ws.data);
     },
-    message(ws: ServerWebSocket, msg: string | ArrayBufferView | ArrayBuffer) {
+    message(ws: BunnyWSClient, msg: string | ArrayBufferView | ArrayBuffer) {
         console.log("Received:", msg);
         ws.send(msg); // send to client
         ws.publish("global", msg); // send to all connected clients (including itself)
     },
-    close(ws: ServerWebSocket) {
+    close(ws: BunnyWSClient) {
         console.log("Client has disconnected:", ws.data);
     }
 }

@@ -9,6 +9,7 @@ Lightweight WebSocket library for Bun
 ## Features
 - :rabbit: Works with Bun
 - :zap: Zero dependencies
+- :gear: Assigns an ID for each client connection
 - :blue_square: Written in TypeScript
 
 ## Installation
@@ -27,19 +28,19 @@ import { BunnyWS } from "@jgtools/bunnyws";
 ## Usage
 
 ```typescript
-import { BunnyWS, BunnyWSEvents } from "@jgtools/bunnyws";
+import { BunnyWS, BunnyWSEvents, BunnyWSClient } from "@jgtools/bunnyws";
 import { ServerWebSocket } from "bun";
 
 const events: BunnyWSEvents = {
-    open(ws: ServerWebSocket) {
+    open(ws: BunnyWSClient) {
         console.log("Client has connected", ws.data);
     },
-    message(ws: ServerWebSocket, msg: string | ArrayBufferView | ArrayBuffer) {
+    message(ws: BunnyWSClient, msg: string | ArrayBufferView | ArrayBuffer) {
         console.log("Received:", msg);
         ws.send(msg); // send to client
         ws.publish("global", msg); // send to all connected clients (including itself)
     },
-    close(ws: ServerWebSocket) {
+    close(ws: BunnyWSClient) {
         console.log("Client has disconnected:", ws.data);
     }
 }
@@ -71,9 +72,9 @@ Methods:
 
 | Property | Type |
 |----------|------|
-| `open` | `(ws: ServerWebSocket) => void` |
-| `message` | `(ws: ServerWebSocket, msg: string \| ArrayBufferView \| ArrayBuffer) => void` |
-| `close` | `(ws: ServerWebSocket) => void` |
+| `open` | `(ws: BunnyWSClient) => void` |
+| `message` | `(ws: BunnyWSClient, msg: string \| ArrayBufferView \| ArrayBuffer) => void` |
+| `close` | `(ws: BunnyWSClient) => void` |
 
 ## License
 
