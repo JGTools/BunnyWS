@@ -24,7 +24,7 @@ export class BunnyWS {
         this.server = Bun.serve({
             websocket: {
                 open(ws: BunnyWSClient) {
-                    ws.data.id = crypto.randomUUID();
+                    ws.data = { id: crypto.randomUUID() };
                     ws.subscribe("global");
                     events.open(ws);
                 },
