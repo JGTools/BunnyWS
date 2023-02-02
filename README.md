@@ -9,7 +9,7 @@ Lightweight WebSocket library for Bun
 ## Features
 - :rabbit: Works with Bun
 - :zap: Zero dependencies
-- :gear: Assigns an ID for each client connection
+- :gear: Assigns an ID to each client connection
 - :blue_square: Written in TypeScript
 
 ## Installation
