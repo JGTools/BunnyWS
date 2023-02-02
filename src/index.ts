@@ -1,12 +1,14 @@
 import { ArrayBufferView, Server, ServerWebSocket } from "bun";
 
+export type BunnyMsg = string | ArrayBufferView | ArrayBuffer;
+
 /** ServerWebSocket with an addition property that stores clients id */
 export type BunnyWSClient = ServerWebSocket<{ id: string }>;
 
 /** Interface that defines the event handlers for a BunnyWS server */
 export interface BunnyWSEvents {
     open: (ws: BunnyWSClient) => void;
-    message: (ws: BunnyWSClient, msg: string | ArrayBufferView | ArrayBuffer) => void;
+    message: (ws: BunnyWSClient, msg: BunnyMsg) => void;
     close: (ws: BunnyWSClient) => void;
 }
 
@@ -37,7 +39,7 @@ export class BunnyWS {
         });
     }
     /** Publishes a message to all connected clients */
-    publish(msg: string | ArrayBufferView | ArrayBuffer, compress?: boolean): number {
+    publish(msg: BunnyMsg, compress?: boolean): number {
         return this.server.publish("global", msg, compress);
     }
 }

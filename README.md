@@ -28,14 +28,14 @@ import { BunnyWS } from "@jgtools/bunnyws";
 ## Usage
 
 ```typescript
-import { BunnyWS, BunnyWSEvents, BunnyWSClient } from "@jgtools/bunnyws";
+import { BunnyMsg, BunnyWS, BunnyWSEvents, BunnyWSClient } from "@jgtools/bunnyws";
 import { ServerWebSocket } from "bun";
 
 const events: BunnyWSEvents = {
     open(ws: BunnyWSClient) {
         console.log("Client has connected", ws.data);
     },
-    message(ws: BunnyWSClient, msg: string | ArrayBufferView | ArrayBuffer) {
+    message(ws: BunnyWSClient, msg: BunnyMsg) {
         console.log("Received:", msg);
         ws.send(msg); // send to client
         ws.publish("global", msg); // send to all connected clients (including itself)
@@ -73,7 +73,7 @@ Methods:
 | Property | Type |
 |----------|------|
 | `open` | `(ws: BunnyWSClient) => void` |
-| `message` | `(ws: BunnyWSClient, msg: string \| ArrayBufferView \| ArrayBuffer) => void` |
+| `message` | `(ws: BunnyWSClient, msg: BunnyMsg) => void` |
 | `close` | `(ws: BunnyWSClient) => void` |
 
 ## License
