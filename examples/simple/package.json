@@ -3,6 +3,6 @@
         "bun-types": "^0.5.4"
     },
     "dependencies": {
-        "@jgtools/bunnyws": "^4.0.4"
+        "@jgtools/bunnyws": "^4.0.5"
     }
 }

@@ -29,11 +29,10 @@ import { BunnyWS } from "@jgtools/bunnyws";
 
 ```typescript
 import { BunnyMsg, BunnyWS, BunnyWSEvents, BunnyWSClient } from "@jgtools/bunnyws";
-import { ServerWebSocket } from "bun";
 
 const events: BunnyWSEvents = {
     open(ws: BunnyWSClient) {
-        console.log("Client has connected", ws.data);
+        console.log("Client has connected", ws.data.id);
     },
     message(ws: BunnyWSClient, msg: BunnyMsg) {
         console.log("Received:", msg);
@@ -41,7 +40,7 @@ const events: BunnyWSEvents = {
         ws.publish("global", msg); // send to all connected clients (including itself)
     },
     close(ws: BunnyWSClient) {
-        console.log("Client has disconnected:", ws.data);
+        console.log("Client has disconnected:", ws.data.id);
     }
 }
 
