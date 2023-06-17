@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "bun-types": "^0.5.4"
+        "bun-types": "^0.6.0"
     },
     "dependencies": {
         "@jgtools/bunnyws": "^4.0.5"
