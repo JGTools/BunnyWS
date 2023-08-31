@@ -2,7 +2,7 @@ import { ArrayBufferView, Server, ServerWebSocket } from "bun";
 
 export type BunnyMsg = string | ArrayBufferView | ArrayBuffer;
 
-/** ServerWebSocket with an addition property that stores clients id */
+/** ServerWebSocket with an additional property for client id */
 export type BunnyWSClient = ServerWebSocket<{ id: string }>;
 
 /** Interface that defines the event handlers for a BunnyWS server */
@@ -23,7 +23,7 @@ export class BunnyWS {
     constructor(port: number, events: BunnyWSEvents) {
         this.server = Bun.serve({
             websocket: {
-                open(ws: BunnyWSClient) {
+                open: (ws: BunnyWSClient) => {
                     ws.data = { id: crypto.randomUUID() };
                     ws.subscribe("global");
                     events.open(ws);

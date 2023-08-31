@@ -1,6 +1,6 @@
 {
     "name": "@jgtools/bunnyws",
-    "version": "4.0.7",
+    "version": "4.0.8",
     "description": "Lightweight WebSocket library for Bun",
     "type": "module",
     "main": "dist/index.js",
@@ -28,6 +28,6 @@
     "homepage": "https://github.com/JGTools/BunnyWS#readme",
     "devDependencies": {
         "tslib": "^2.4.1",
-        "bun-types": "^0.6.0"
+        "bun-types": "^0.8.1"
     }
 }

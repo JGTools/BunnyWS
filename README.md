@@ -31,15 +31,15 @@ import { BunnyWS } from "@jgtools/bunnyws";
 import { BunnyMsg, BunnyWS, BunnyWSEvents, BunnyWSClient } from "@jgtools/bunnyws";
 
 const events: BunnyWSEvents = {
-    open(ws: BunnyWSClient) {
+    open: (ws: BunnyWSClient) => {
         console.log("Client has connected", ws.data.id);
     },
-    message(ws: BunnyWSClient, msg: BunnyMsg) {
+    message: (ws: BunnyWSClient, msg: BunnyMsg) => {
         console.log("Received:", msg);
         ws.send(msg); // send to client
         ws.publish("global", msg); // send to all connected clients (excluding itself)
     },
-    close(ws: BunnyWSClient) {
+    close: (ws: BunnyWSClient) => {
         console.log("Client has disconnected:", ws.data.id);
     }
 }

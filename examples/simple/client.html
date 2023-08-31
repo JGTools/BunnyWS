@@ -6,7 +6,7 @@
 
 <body>
     <script>
-        var ws = new WebSocket("ws://localhost:8080/");
+        const ws = new WebSocket("ws://localhost:8080/");
 
         ws.onopen = () => {
             console.log("WebSocket connection established");
@@ -18,13 +18,13 @@
             console.log("Received message: " + e.data);
         };
 
-        function sendMove() {
+        const sendMove = () => {
             ws.send("move");
-        }
+        };
 
-        function sendShoot() {
+        const sendShoot = () => {
             ws.send("shoot");
-        }
+        };
     </script>
     <button onclick="sendMove()">Move</button>
     <button onclick="sendShoot()">Shoot</button>
